@@ -3,6 +3,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
+  serverless = require('serverless-http');
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
  
@@ -55,5 +56,4 @@ app.get('/webhook', (req, res) => {
       }
     }
   });
-// Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+  module.exports.handler = serverless(app);
